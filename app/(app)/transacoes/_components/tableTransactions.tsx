@@ -32,6 +32,8 @@ import {
   TRANSACTIONS_CATEGORIES_MAP,
   TRANSACTIONS_PAYMENT_MAP,
 } from "@/app/_lib/const";
+import { formaterCurrentDate } from "@/app/_lib/formaterCurrentDate";
+import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
 
 export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
@@ -61,14 +63,11 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
     accessorKey: "date",
     header: "Data",
     cell: (cell) => {
-      const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      });
       return (
         <div className="flex items-center space-x-2">
-          <span>{dateFormatter.format(new Date(cell.row.original.date))}</span>
+          <span>
+            {formaterCurrentDate.format(new Date(cell.row.original.date))}
+          </span>
         </div>
       );
     },
@@ -77,14 +76,10 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
     accessorKey: "amount",
     header: "Valor",
     cell: (cell) => {
-      const numberFormatter = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
       return (
         <div className="flex items-center space-x-2">
           <span>
-            {numberFormatter.format(Number(cell.row.original.amount))}
+            {formaterCurrentNumber.format(Number(cell.row.original.amount))}
           </span>
         </div>
       );
