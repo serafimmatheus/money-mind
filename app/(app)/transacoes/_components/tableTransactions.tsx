@@ -28,6 +28,10 @@ import {
 } from "@/app/_components/ui/table";
 import { Transaction } from "@prisma/client";
 import TypeTransactionBadge from "./type-badge";
+import {
+  TRANSACTIONS_CATEGORIES_MAP,
+  TRANSACTIONS_PAYMENT_MAP,
+} from "@/app/_lib/const";
 
 export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
@@ -44,10 +48,14 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "category",
     header: "Categoria",
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTIONS_CATEGORIES_MAP[transaction.category],
   },
   {
     accessorKey: "paymentMethod",
     header: "Método de Pagamento",
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTIONS_PAYMENT_MAP[transaction.paymentMethod],
   },
   {
     accessorKey: "date",
@@ -214,19 +222,21 @@ export function TableTransactions({ data }: TableTransactionsProps) {
         <div className="space-x-2">
           <Button
             variant="outline"
+            className="select-none"
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
+            className="select-none"
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Próximo
           </Button>
         </div>
       </div>
