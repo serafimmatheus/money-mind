@@ -96,7 +96,11 @@ body {
   }
 }
 
-
+@layer components {
+  .container {
+    @apply mx-auto w-full max-w-7xl px-4;
+  }
+}
 
 @layer base {
   * {
