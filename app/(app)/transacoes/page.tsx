@@ -7,7 +7,7 @@ import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
 import AddTransactionButton from "@/app/_components/add-transaction-button";
 
 const PageTransactions = async () => {
-  const { userId } = await auth();
+  const { userId } = auth();
   const transactions = await db.transaction.findMany({
     where: {
       userId,

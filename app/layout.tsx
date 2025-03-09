@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "./_components/ui/sonner";
+import { Provider } from "./_provider/queryClient";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -23,14 +24,17 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${mulish.className} dark antialiased`}>
-        <Toaster />
-        <ClerkProvider
-          appearance={{
-            baseTheme: dark,
-          }}
-        >
-          {children}
-        </ClerkProvider>
+        <Provider>
+          <Toaster />
+
+          <ClerkProvider
+            appearance={{
+              baseTheme: dark,
+            }}
+          >
+            {children}
+          </ClerkProvider>
+        </Provider>
       </body>
     </html>
   );

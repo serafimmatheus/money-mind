@@ -43,7 +43,8 @@ import {
 import DatePicker from "./date-picker";
 
 import { toast } from "sonner";
-
+import { useMutation } from "@tanstack/react-query";
+import { addTransactions } from "../_actions/transactions/add-transactions";
 const formSchema = z.object({
   name: z
     .string()
@@ -55,9 +56,7 @@ const formSchema = z.object({
       message: "O nome deve ter no máximo 50 caracteres",
     }),
 
-  amount: z.string().trim().min(1, {
-    message: "O valor deve ser maior que 0",
-  }),
+  amount: z.number(),
   type: z.nativeEnum(TransactionType, {
     required_error: "Selecione o tipo da transação",
   }),
@@ -79,7 +78,7 @@ const AddTransactionButton = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      amount: "",
+      amount: 0,
       type: TransactionType.EXPENSE,
       category: TransactionCategoryType.OTHER,
       paymentMethod: TransactionPaymentType.OTHER,
@@ -87,10 +86,24 @@ const AddTransactionButton = () => {
     },
   });
 
-  const handleSubmit = (data: FormValues) => {
-    toast("Event has been created", {
-      description: JSON.stringify(data, null, 2),
-    });
+  const {
+    mutateAsync: mutationAddTransactions,
+    isPending: isPendingAddTransactions,
+  } = useMutation({
+    mutationFn: addTransactions,
+    onError: (error) => {
+      toast("Erro na transação.", {
+        description: error.message,
+      });
+    },
+    onSuccess: () => {
+      toast("Transação adicionada com sucesso.");
+      form.reset();
+    },
+  });
+
+  const handleSubmit = async (data: FormValues) => {
+    await mutationAddTransactions(data);
   };
 
   return (
@@ -132,11 +145,16 @@ const AddTransactionButton = () => {
                 <FormItem>
                   <FormLabel>Valor</FormLabel>
                   <FormControl>
-                    <MoneyInput placeholder="Digite o valor..." {...field} />
+                    <MoneyInput
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                      value={field.value}
+                    />
                   </FormControl>
-                  <FormDescription>
-                    Nome da transação, por exemplo: &quot;Salário&quot;
-                  </FormDescription>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -246,6 +264,7 @@ const AddTransactionButton = () => {
             <DialogFooter>
               <DialogClose asChild>
                 <Button
+                  disabled={isPendingAddTransactions}
                   onClick={() => {
                     form.reset();
                   }}
@@ -255,7 +274,10 @@ const AddTransactionButton = () => {
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button type="submit">Adicionar</Button>
+
+              <Button disabled={isPendingAddTransactions} type="submit">
+                Adicionar
+              </Button>
             </DialogFooter>
           </form>
         </Form>
