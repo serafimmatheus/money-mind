@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 const HeaderApp = () => {
   const pathName = usePathname();
 
-  console.log("pathName", pathName);
   return (
     <header className="mb-8 border-b py-6">
       <div className="container flex items-center justify-between">
