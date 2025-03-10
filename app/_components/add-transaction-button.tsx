@@ -23,6 +23,7 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  Transaction,
   TransactionCategoryType,
   TransactionPaymentType,
   TransactionType,
@@ -44,7 +45,7 @@ import DatePicker from "./date-picker";
 
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
-import { addTransactions } from "../_actions/transactions/add-transactions";
+import { upsertTransactions } from "../_actions/transactions/add-transactions";
 const formSchema = z.object({
   name: z
     .string()
@@ -79,24 +80,34 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const AddTransactionButton = () => {
+interface AddTransactionButtonProps {
+  isEditing?: boolean;
+  transaction?: Transaction;
+  transactionId?: string;
+}
+
+const AddTransactionButton = ({
+  isEditing = false,
+  transaction,
+  transactionId,
+}: AddTransactionButtonProps) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      amount: 0,
-      type: TransactionType.EXPENSE,
-      category: TransactionCategoryType.OTHER,
-      paymentMethod: TransactionPaymentType.OTHER,
-      date: new Date(),
+      name: transaction?.name ?? "",
+      amount: Number(transaction?.amount) ?? 20,
+      type: transaction?.type ?? TransactionType.EXPENSE,
+      category: transaction?.category ?? TransactionCategoryType.OTHER,
+      paymentMethod: transaction?.paymentMethod ?? TransactionPaymentType.OTHER,
+      date: transaction?.date ?? new Date(),
     },
   });
 
   const {
-    mutateAsync: mutationAddTransactions,
-    isPending: isPendingAddTransactions,
+    mutateAsync: mutationupsertTransactions,
+    isPending: isPendingupsertTransactions,
   } = useMutation({
-    mutationFn: addTransactions,
+    mutationFn: upsertTransactions,
     onError: (error) => {
       toast("Erro na transação.", {
         description: error.message,
@@ -109,15 +120,19 @@ const AddTransactionButton = () => {
   });
 
   const handleSubmit = async (data: FormValues) => {
-    await mutationAddTransactions(data);
+    await mutationupsertTransactions({ ...data, id: transactionId });
   };
 
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle>Adicionar Transação</DialogTitle>
+        <DialogTitle>
+          {isEditing ? "Editar Transação" : "Adicionar Transação"}
+        </DialogTitle>
         <DialogDescription>
-          Preencha o formulário abaixo para adicionar uma nova transação.
+          {isEditing
+            ? "Preencha o formulário abaixo para editar a transação."
+            : "Preencha o formulário abaixo para adicionar uma nova transação."}
         </DialogDescription>
       </DialogHeader>
 
@@ -270,7 +285,7 @@ const AddTransactionButton = () => {
             <DialogFooter>
               <DialogClose asChild>
                 <Button
-                  disabled={isPendingAddTransactions}
+                  disabled={isPendingupsertTransactions}
                   onClick={() => {
                     form.reset();
                   }}
@@ -281,8 +296,8 @@ const AddTransactionButton = () => {
                 </Button>
               </DialogClose>
 
-              <Button disabled={isPendingAddTransactions} type="submit">
-                Adicionar
+              <Button disabled={isPendingupsertTransactions} type="submit">
+                {isEditing ? "Editar" : "Adicionar"}
               </Button>
             </DialogFooter>
           </form>

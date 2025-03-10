@@ -5,7 +5,7 @@ import {
 } from "@prisma/client";
 import { z } from "zod";
 
-export const addTransactionsSchema = z.object({
+export const upsertTransactionsSchema = z.object({
   name: z.string().trim().min(2).max(50),
 
   amount: z.number().positive(),

@@ -34,6 +34,8 @@ import {
 } from "@/app/_lib/const";
 import { formaterCurrentDate } from "@/app/_lib/formaterCurrentDate";
 import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
+import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
+import AddTransactionButton from "@/app/_components/add-transaction-button";
 
 export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
@@ -91,15 +93,25 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
       const id = cell.row.original.id;
       return (
         <div className="flex items-center space-x-2">
-          <Button
-            onClick={() => {
-              console.log(`Edit transaction with id ${id}`);
-            }}
-            variant="outline"
-            size="icon"
-          >
-            <SquarePen />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                onClick={() => {
+                  console.log(`Edit transaction with id ${id}`);
+                }}
+                variant="outline"
+                size="icon"
+              >
+                <SquarePen />
+              </Button>
+            </DialogTrigger>
+
+            <AddTransactionButton
+              isEditing={true}
+              transaction={cell.row.original}
+              transactionId={id}
+            />
+          </Dialog>
           <Button
             onClick={() => {
               console.log(`Delete transaction with id ${id}`);
