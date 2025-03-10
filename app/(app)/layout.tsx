@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import HeaderApp from "../_components/header-app";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,5 +21,11 @@ export default function Layout({
 
   console.log("userId", userId);
 
-  return <>{children}</>;
+  return (
+    <>
+      <HeaderApp />
+
+      {children}
+    </>
+  );
 }

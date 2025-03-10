@@ -36,6 +36,7 @@ import { formaterCurrentDate } from "@/app/_lib/formaterCurrentDate";
 import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
 import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
 import AddTransactionButton from "@/app/_components/add-transaction-button";
+import { deleteTransactions } from "@/app/_actions/transactions/delete-transactions";
 
 export const transactionsColumns: ColumnDef<Transaction>[] = [
   {
@@ -113,8 +114,8 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
             />
           </Dialog>
           <Button
-            onClick={() => {
-              console.log(`Delete transaction with id ${id}`);
+            onClick={async () => {
+              await deleteTransactions(id);
             }}
             variant="outline"
             size="icon"

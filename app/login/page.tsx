@@ -4,6 +4,7 @@ import { LogIn } from "lucide-react";
 import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Logo from "../_components/logo";
 
 const LoginPage = async () => {
   const { userId } = await auth();
@@ -14,7 +15,7 @@ const LoginPage = async () => {
   return (
     <div className="grid h-full grid-cols-2">
       <div className="mx-auto flex h-full w-full max-w-[500px] flex-col justify-center gap-6 px-5 md:px-8">
-        <h1 className="text-primary text-3xl font-bold">Money Mind</h1>
+        <Logo />
 
         <h2 className="text-4xl font-semibold">Bem-vindo</h2>
 
