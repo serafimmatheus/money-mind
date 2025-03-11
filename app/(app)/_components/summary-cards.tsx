@@ -1,19 +1,71 @@
-import { Card, CardHeader } from "@/app/_components/ui/card";
-import { WalletIcon } from "lucide-react";
+import { Badge } from "@/app/_components/ui/badge";
+import {
+  PiggyBankIcon,
+  TrendingDownIcon,
+  TrendingUpIcon,
+  WalletIcon,
+} from "lucide-react";
+import SummaryCard from "./summary-card";
 
-const SummaryCard = () => {
+interface SummaryCardsProps {
+  balance: number;
+  investimensTotal: number;
+  depositsTotal: number;
+  expensesTotal: number;
+}
+
+const SummaryCards = async ({
+  balance,
+  depositsTotal,
+  expensesTotal,
+  investimensTotal,
+}: SummaryCardsProps) => {
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <div className="flex flex-row items-center space-x-2">
-            <WalletIcon size={16} />
-            <p className="text-white/70">Saldo</p>
-          </div>
-        </CardHeader>
-      </Card>
+      <SummaryCard
+        size="large"
+        icon={
+          <Badge className="size-10 bg-primary/30 hover:bg-primary/30">
+            <WalletIcon size={16} className="text-primary" />
+          </Badge>
+        }
+        title="Saldo"
+        amount={balance}
+      />
+
+      <div className="grid grid-cols-3 gap-6">
+        <SummaryCard
+          icon={
+            <Badge className="size-10 bg-foreground/30 hover:bg-foreground/30">
+              <PiggyBankIcon className="text-muted-foreground" size={16} />
+            </Badge>
+          }
+          title="Investido"
+          amount={investimensTotal}
+        />
+
+        <SummaryCard
+          icon={
+            <Badge className="size-10 bg-primary/30 hover:bg-primary/30">
+              <TrendingUpIcon className="text-primary" size={14} />
+            </Badge>
+          }
+          title="Receita"
+          amount={depositsTotal}
+        />
+
+        <SummaryCard
+          icon={
+            <Badge className="size-10 bg-red-500/30 hover:bg-red-500/30">
+              <TrendingDownIcon className="text-red-500" size={14} />
+            </Badge>
+          }
+          title="Despesas"
+          amount={expensesTotal}
+        />
+      </div>
     </div>
   );
 };
 
-export default SummaryCard;
+export default SummaryCards;

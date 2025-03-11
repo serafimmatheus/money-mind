@@ -6,6 +6,7 @@ import { Mulish } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "./_components/ui/sonner";
 import { Provider } from "./_provider/queryClient";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -32,7 +33,7 @@ export default function RootLayout({
               baseTheme: dark,
             }}
           >
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
           </ClerkProvider>
         </Provider>
       </body>
