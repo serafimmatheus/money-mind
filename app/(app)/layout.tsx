@@ -19,8 +19,6 @@ export default function Layout({
     redirect("/login");
   }
 
-  console.log("userId", userId);
-
   return (
     <>
       <HeaderApp />

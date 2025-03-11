@@ -47,7 +47,7 @@ const HeaderApp = () => {
           </ul>
         </nav>
 
-        <UserButton />
+        <UserButton showName />
       </div>
     </header>
   );
