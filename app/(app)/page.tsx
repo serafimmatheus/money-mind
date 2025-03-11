@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import SummaryCard from "./_components/summary-cards";
 
 const home = () => {
   const { userId } = auth();
@@ -10,7 +11,12 @@ const home = () => {
 
   return (
     <main className="container">
-      <h1>Hello world!</h1>
+      <div className="grid grid-cols-5">
+        <div className="col-span-3">
+          <SummaryCard />
+        </div>
+        <div className="col-span-2"></div>
+      </div>
     </main>
   );
 };
