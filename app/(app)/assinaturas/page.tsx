@@ -12,6 +12,8 @@ import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
 import { CheckIcon, XIcon } from "lucide-react";
 import ButtonPro from "./_components/button-pro";
 import { auth, clerkClient } from "@clerk/nextjs/server";
+import { db } from "@/app/_lib/prisma";
+import { endOfMonth, startOfMonth } from "date-fns";
 
 const SignaturePage = async () => {
   const { userId } = auth();
@@ -22,12 +24,23 @@ const SignaturePage = async () => {
 
   const user = await clerkClient().users.getUser(userId);
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
+  const currentMonthTransaction = await db.transaction.count({
+    where: {
+      userId: userId,
+      createdAt: {
+        gte: startOfMonth(new Date()),
+        lt: endOfMonth(new Date()),
+      },
+    },
+  });
 
   return (
     <div className="container">
       <h1 className="text-2xl font-bold">Assinaturas</h1>
       <div className="mt-6 flex gap-6">
-        <Card className={`relative ${!hasPremiumPlan ? "border-primary" : ""}`}>
+        <Card
+          className={`relative min-w-96 ${!hasPremiumPlan ? "border-primary" : ""}`}
+        >
           {!hasPremiumPlan && (
             <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
           )}
@@ -51,7 +64,7 @@ const SignaturePage = async () => {
             <ul>
               <li className="flex items-center gap-4">
                 <CheckIcon className="text-primary" size={16} />
-                Apenas 10 transações por mês
+                Apenas 10 transações por mês ({currentMonthTransaction} / 10)
               </li>
 
               <li className="flex items-center gap-4">
@@ -68,7 +81,9 @@ const SignaturePage = async () => {
           </CardFooter>
         </Card>
 
-        <Card className={`relative ${hasPremiumPlan ? "border-primary" : ""}`}>
+        <Card
+          className={`relative min-w-96 ${hasPremiumPlan ? "border-primary" : ""}`}
+        >
           {hasPremiumPlan && (
             <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
           )}
@@ -89,7 +104,7 @@ const SignaturePage = async () => {
             <ul>
               <li className="flex items-center gap-4">
                 <CheckIcon className="text-primary" size={16} />
-                Apenas 10 transações por mês
+                Transações ilimitadas
               </li>
 
               <li className="flex items-center gap-4">
