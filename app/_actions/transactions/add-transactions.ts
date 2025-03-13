@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/app/_lib/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import {
   TransactionCategoryType,
   TransactionPaymentType,
@@ -9,6 +9,7 @@ import {
 } from "@prisma/client";
 import { upsertTransactionsSchema } from "./schema";
 import { revalidatePath } from "next/cache";
+import { endOfMonth, startOfMonth } from "date-fns";
 
 interface UpsertTransactionsParams {
   id?: string;
@@ -27,6 +28,22 @@ export const upsertTransactions = async (params: UpsertTransactionsParams) => {
 
   if (!userId) {
     throw new Error("Não autorizado");
+  }
+
+  const user = await clerkClient().users.getUser(userId);
+  const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
+  const currentMonthTransaction = await db.transaction.count({
+    where: {
+      userId: userId,
+      createdAt: {
+        gte: startOfMonth(new Date()),
+        lt: endOfMonth(new Date()),
+      },
+    },
+  });
+
+  if (currentMonthTransaction >= 10 && !hasPremiumPlan) {
+    throw new Error("Limite de transações atingido.");
   }
 
   await db.transaction.upsert({
