@@ -1,11 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import SummaryCards from "./_components/summary-cards";
-import TimeSelected from "./_components/date-selected";
 import TransactionPieChart from "./_components/transactions-pie-chart";
 import { getDashboard } from "../_data/get-dashboard";
 import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransactions from "./_components/last-transactions";
+import HeaderDashboard from "./_components/header-dashboard";
 
 interface SearchParams {
   initDate?: string;
@@ -47,7 +47,7 @@ const home = async ({ searchParams }: Props) => {
 
   return (
     <div className="container pb-20">
-      <TimeSelected />
+      <HeaderDashboard />
       <div className="grid grid-cols-5 gap-5">
         <div className="col-span-3">
           <SummaryCards {...dashboardData} />
