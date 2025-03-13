@@ -5,6 +5,7 @@ import TimeSelected from "./_components/date-selected";
 import TransactionPieChart from "./_components/transactions-pie-chart";
 import { getDashboard } from "../_data/get-dashboard";
 import ExpensesPerCategory from "./_components/expenses-per-category";
+import LastTransactions from "./_components/last-transactions";
 
 interface SearchParams {
   initDate?: string;
@@ -67,7 +68,10 @@ const home = async ({ searchParams }: Props) => {
             </div>
           </div>
         </div>
-        <div className="col-span-2"></div>
+
+        <div className="col-span-2">
+          <LastTransactions lastTranactions={dashboardData.lastTransactions} />
+        </div>
       </div>
     </main>
   );

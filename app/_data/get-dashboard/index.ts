@@ -112,6 +112,17 @@ export const getDashboard = async ({
     ),
   }));
 
+  const lastTransactions = await db.transaction.findMany({
+    where: {
+      ...where,
+      userId,
+    },
+    orderBy: {
+      date: "desc",
+    },
+    take: 20,
+  });
+
   return {
     balance,
     depositsTotal,
@@ -119,5 +130,6 @@ export const getDashboard = async ({
     investimensTotal,
     typesPercentage,
     totalExpensePerCategory,
+    lastTransactions,
   };
 };
