@@ -17,7 +17,7 @@ const PageTransactions = async () => {
     },
   });
   return (
-    <main className="container">
+    <div className="container">
       <div className="flex items-center justify-between gap-4">
         <h1 className="text-2xl font-bold">Transações</h1>
 
@@ -34,7 +34,7 @@ const PageTransactions = async () => {
       </div>
 
       <TableTransactions data={transactions} />
-    </main>
+    </div>
   );
 };
 

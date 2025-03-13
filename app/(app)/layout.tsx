@@ -21,9 +21,10 @@ export default function Layout({
 
   return (
     <>
-      <HeaderApp />
-
-      {children}
+      <main className="flex h-full flex-col">
+        <HeaderApp />
+        {children}
+      </main>
     </>
   );
 }

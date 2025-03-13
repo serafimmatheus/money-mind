@@ -1,8 +1,8 @@
 const SignaturePage = () => {
   return (
-    <main className="container">
+    <div className="container">
       <h1>Assinaturas</h1>
-    </main>
+    </div>
   );
 };
 

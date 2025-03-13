@@ -46,7 +46,7 @@ const home = async ({ searchParams }: Props) => {
   });
 
   return (
-    <main className="container">
+    <div className="container pb-20">
       <TimeSelected />
       <div className="grid grid-cols-5 gap-5">
         <div className="col-span-3">
@@ -73,7 +73,7 @@ const home = async ({ searchParams }: Props) => {
           <LastTransactions lastTranactions={dashboardData.lastTransactions} />
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
