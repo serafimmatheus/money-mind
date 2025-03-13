@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 Money Mind
 
-## Getting Started
+**Money Mind** é uma aplicação simples e poderosa para **gerenciamento financeiro pessoal**, focada em controle de gastos, investimentos e geração de relatórios inteligentes. 🚀
 
-First, run the development server:
+![Money Mind Banner](https://via.placeholder.com/1200x400.png?text=Money+Mind)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧩 Funcionalidades
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 📈 **Dashboard interativa** com:
+  - Gráfico **PIE** de distribuição de despesas
+  - Últimas transações
+  - Saldo atual
+  - Investimentos e despesas detalhados
+- 🔐 **Autenticação segura** integrada com **Clerk**
+- 🤖 **Relatórios inteligentes** utilizando **ChatGPT** (apenas para planos PRO)
+- 💳 **Pagamentos via Stripe** para upgrade de plano
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Plano PRO
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- ✅ Sem limites de transações
+- ✅ Acesso completo aos relatórios gerados por IA
+- ✅ Análise financeira avançada
 
-## Learn More
+**Limitações para usuários FREE:**
 
-To learn more about Next.js, take a look at the following resources:
+- 🚫 Máximo de **10 transações por mês**
+- 🚫 Sem acesso aos relatórios de IA
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📊 Relatórios com IA
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Usuários PRO podem gerar relatórios personalizados com base nas transações, utilizando o poder do **ChatGPT**. Estes relatórios oferecem insights valiosos sobre seus hábitos financeiros e sugerem formas de otimizar seus gastos.
 
-## Deploy on Vercel
+## 📦 Tecnologias
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js 14**
+- **TypeScript**
+- **Prisma ORM**
+- **Clerk** (autenticação)
+- **ChatGPT** (relatórios)
+- **Stripe** (pagamentos)
+- **TailwindCSS** (estilização)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔧 Como rodar o projeto
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/seu-usuario/money-mind.git
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   cd money-mind
+   npm install
+   ```
+
+3. Configure as variáveis de ambiente criando um arquivo `.env`:
+
+   ```plaintext
+   DATABASE_URL=postgresql://...
+   CLERK_API_KEY=...
+   STRIPE_SECRET_KEY=...
+   OPENAI_API_KEY=...
+   ```
+
+4. Rode o servidor localmente:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Acesse o projeto em:
+   ```
+   http://localhost:3000
+   ```
+
+## 📚 Contribuindo
+
+Quer contribuir? Sinta-se à vontade para abrir uma **issue** ou enviar um **pull request**!
+
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature: `git checkout -b minha-feature`
+3. Commit suas mudanças: `git commit -m 'feat: minha nova funcionalidade'`
+4. Push para a branch: `git push origin minha-feature`
+5. Abra um **Pull Request**
+
+## 📄 Tags
+
+![Next.js](https://img.shields.io/badge/Next.js-14-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.5-blue)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-blue)
+![Clerk](https://img.shields.io/badge/Clerk-Auth-green)
+![ChatGPT](https://img.shields.io/badge/ChatGPT-AI-orange)
+![Stripe](https://img.shields.io/badge/Stripe-Payments-purple)
+
+## 📝 Licença
+
+Este projeto está sob a licença **MIT**. Sinta-se livre para usá-lo, modificá-lo e distribuí-lo.
+
+---
+
+Desenvolvido com ❤️ por [Seu Nome](https://github.com/seu-usuario)
