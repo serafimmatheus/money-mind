@@ -84,14 +84,12 @@ interface AddTransactionButtonProps {
   isEditing?: boolean;
   transaction?: Transaction;
   transactionId?: string;
-  userCanAddTransaction?: boolean;
 }
 
 const AddTransactionButton = ({
   isEditing = false,
   transaction,
   transactionId,
-  userCanAddTransaction = false,
 }: AddTransactionButtonProps) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -122,14 +120,7 @@ const AddTransactionButton = ({
   });
 
   const handleSubmit = async (data: FormValues) => {
-    if (userCanAddTransaction) {
-      await mutationupsertTransactions({ ...data, id: transactionId });
-      return;
-    }
-
-    toast("Você não tem permissão para adicionar transações.", {
-      description: "Entre em contato com o nosso suporte.",
-    });
+    await mutationupsertTransactions({ ...data, id: transactionId });
   };
 
   return (
