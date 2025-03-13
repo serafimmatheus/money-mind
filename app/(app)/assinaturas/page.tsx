@@ -11,14 +11,27 @@ import { Separator } from "@/app/_components/ui/separator";
 import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
 import { CheckIcon, XIcon } from "lucide-react";
 import ButtonPro from "./_components/button-pro";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
-const SignaturePage = () => {
+const SignaturePage = async () => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return <div>Usuário não autenticado</div>;
+  }
+
+  const user = await clerkClient().users.getUser(userId);
+  const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
+
   return (
     <div className="container">
       <h1 className="text-2xl font-bold">Assinaturas</h1>
       <div className="mt-6 flex gap-6">
-        <Card className="relative border-primary">
-          <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
+        <Card className={`relative ${!hasPremiumPlan ? "border-primary" : ""}`}>
+          {!hasPremiumPlan && (
+            <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
+          )}
+
           <CardHeader className="items-center py-12">
             <CardTitle className="text-muted-foreground">
               Plano Básico
@@ -55,7 +68,10 @@ const SignaturePage = () => {
           </CardFooter>
         </Card>
 
-        <Card className="relative">
+        <Card className={`relative ${hasPremiumPlan ? "border-primary" : ""}`}>
+          {hasPremiumPlan && (
+            <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
+          )}
           <CardHeader className="items-center py-12">
             <CardTitle className="text-muted-foreground">Plano PRO</CardTitle>
 

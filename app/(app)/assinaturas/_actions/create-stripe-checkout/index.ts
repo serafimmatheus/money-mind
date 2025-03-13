@@ -40,8 +40,8 @@ export const createStripeCheckout = async () => {
         quantity: 1,
       },
     ],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/assinaturas/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/assinaturas/cancel`,
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/assinaturas?isCheckou=success`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/assinaturas?isCheckou=cancel`,
   });
 
   return {
