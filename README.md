@@ -58,10 +58,22 @@ Usuários PRO podem gerar relatórios personalizados com base nas transações, 
 3. Configure as variáveis de ambiente criando um arquivo `.env`:
 
    ```plaintext
+   # BANCO
    DATABASE_URL=postgresql://...
-   CLERK_API_KEY=...
-   STRIPE_SECRET_KEY=...
-   OPENAI_API_KEY=...
+
+   # CLERK
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+   CLERK_SECRET_KEY=...
+
+   # APP
+   NEXT_PUBLIC_APP_URL="..."
+
+   # Stripe
+   STRIPE_PREMIUM_PLAN_PRICE_ID="..."
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="..."
+   STRIPE_SECRET_KEY="..."
+   STRIPE_WEBHOOK_SECRET="..."
+   NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL="..."
    ```
 
 4. Rode o servidor localmente:
