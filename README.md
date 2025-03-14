@@ -100,4 +100,4 @@ Este projeto está sob a licença **MIT**. Sinta-se livre para usá-lo, modific�
 
 ---
 
-Desenvolvido com ❤️ por [Seu Nome](https://github.com/seu-usuario)
+Desenvolvido com ❤️ por [Matheus Serafim](https://github.com/serafimmatheus)
