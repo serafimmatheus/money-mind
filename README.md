@@ -45,7 +45,7 @@ Usuários PRO podem gerar relatórios personalizados com base nas transações, 
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/money-mind.git
+   git clone https://github.com/serafimmatheus/money-mind.git
    ```
 
 2. Instale as dependências:
