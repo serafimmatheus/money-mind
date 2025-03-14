@@ -47,7 +47,7 @@ const home = async ({ searchParams }: Props) => {
 
   return (
     <div className="container pb-20">
-      <HeaderDashboard />
+      <HeaderDashboard startDate={startDate} />
       <div className="grid grid-cols-5 gap-5">
         <div className="col-span-3">
           <SummaryCards {...dashboardData} />

@@ -4,7 +4,11 @@ import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
 import { ClipboardMinusIcon } from "lucide-react";
 import TimeSelected from "./date-selected";
 
-const HeaderDashboard = () => {
+interface HeaderDashboardProps {
+  startDate: Date;
+}
+
+const HeaderDashboard = ({ startDate }: HeaderDashboardProps) => {
   return (
     <div className="mb-5 flex items-center justify-between">
       <h1 className="text-2xl font-bold">Dashboard</h1>
@@ -18,7 +22,7 @@ const HeaderDashboard = () => {
             </Button>
           </DialogTrigger>
 
-          <DialogReport />
+          <DialogReport date={startDate} />
         </Dialog>
 
         <TimeSelected />
