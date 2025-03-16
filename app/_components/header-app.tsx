@@ -8,13 +8,15 @@ import { usePathname } from "next/navigation";
 const HeaderApp = () => {
   const pathName = usePathname();
 
+  const isPageSize = window.screen.width < 768;
+
   return (
     <header className="mb-8 border-b py-6">
       <div className="container flex items-center justify-between">
         <nav className="flex items-center space-x-12">
           <Logo />
 
-          <ul className="flex items-center space-x-4">
+          <ul className="hidden items-center space-x-4 md:flex">
             <Link href={"/"}>
               <li
                 className={`text-muted-foreground hover:underline ${
@@ -47,7 +49,7 @@ const HeaderApp = () => {
           </ul>
         </nav>
 
-        <UserButton showName />
+        {isPageSize ? <UserButton /> : <UserButton showName />}
       </div>
     </header>
   );
