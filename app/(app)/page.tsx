@@ -6,6 +6,7 @@ import { getDashboard } from "../_data/get-dashboard";
 import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransactions from "./_components/last-transactions";
 import HeaderDashboard from "./_components/header-dashboard";
+import { endOfMonth, startOfMonth } from "date-fns";
 
 interface SearchParams {
   initDate?: string;
@@ -23,13 +24,13 @@ const home = async ({ searchParams }: Props) => {
     if (!dateString) return null;
     const [day, month, year] = dateString.split("-").map(Number);
     if (!day || !month || !year) return null;
-    const date = new Date(year, month - 1, day); // month é zero-based
+    const date = new Date(year, month - 1, day);
 
     return isNaN(date.getTime()) ? null : date;
   };
 
-  const startDate = parseDate(initDate) || new Date();
-  const finalDate = parseDate(endDate) || new Date();
+  const startDate = parseDate(initDate) || startOfMonth(new Date());
+  const finalDate = parseDate(endDate) || endOfMonth(new Date());
 
   if (!startDate || !finalDate) {
     console.error("Erro ao processar as datas:", { startDate, finalDate });

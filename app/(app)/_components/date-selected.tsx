@@ -15,6 +15,7 @@ import { Calendar } from "@/app/_components/ui/calendar";
 import { ptBR } from "date-fns/locale";
 
 import { useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 const TimeSelected = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
@@ -41,7 +42,7 @@ const TimeSelected = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!date) return;
 
     if (date.from) {
@@ -50,7 +51,7 @@ const TimeSelected = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
     if (date.to) {
       setDateEnd(format(date.to, "dd-MM-yyyy"));
     }
-  }, [date.from, date.to]);
+  }, [date, setDateInit, setDateEnd]);
 
   return (
     <div className={cn("grid gap-2", className)}>
