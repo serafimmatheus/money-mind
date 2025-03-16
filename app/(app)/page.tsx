@@ -50,11 +50,11 @@ const home = async ({ searchParams }: Props) => {
     <div className="container pb-20">
       <HeaderDashboard startDate={startDate} />
       <div className="grid grid-cols-5 gap-5">
-        <div className="col-span-3">
+        <div className="col-span-5 lg:col-span-3">
           <SummaryCards {...dashboardData} />
 
-          <div className="mt-6 grid grid-cols-3 gap-6">
-            <div className="col-span-1">
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="col-span-3 md:col-span-1">
               <TransactionPieChart
                 depositsTotal={dashboardData.depositsTotal}
                 expensesTotal={dashboardData.expensesTotal}
@@ -62,7 +62,7 @@ const home = async ({ searchParams }: Props) => {
                 typesPercentage={dashboardData.typesPercentage}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-3 md:col-span-2">
               <ExpensesPerCategory
                 expensesPerCategory={dashboardData.totalExpensePerCategory}
               />
@@ -70,7 +70,7 @@ const home = async ({ searchParams }: Props) => {
           </div>
         </div>
 
-        <div className="col-span-2">
+        <div className="col-span-2 hidden lg:block">
           <LastTransactions lastTranactions={dashboardData.lastTransactions} />
         </div>
       </div>

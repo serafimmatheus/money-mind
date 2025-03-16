@@ -41,7 +41,7 @@ const SummaryCard = async ({
 
       <CardContent className="flex justify-between">
         <p
-          className={`font-bold ${size === "small" ? "text-2xl" : "text-4xl"} `}
+          className={`font-bold ${size === "small" ? "text-xl sm:text-2xl" : "text-2xl sm:text-4xl"} `}
         >
           {formaterCurrentNumber.format(amount)}
         </p>
@@ -50,7 +50,7 @@ const SummaryCard = async ({
           <Dialog>
             <DialogTrigger asChild>
               <Button className="rounded-full">
-                Adicionar Transação
+                <p className="hidden sm:block">Adicionar Transação</p>
                 <ArrowUpDown />
               </Button>
             </DialogTrigger>

@@ -10,10 +10,10 @@ interface HeaderDashboardProps {
 
 const HeaderDashboard = ({ startDate }: HeaderDashboardProps) => {
   return (
-    <div className="mb-5 flex items-center justify-between">
+    <div className="mb-5 flex flex-col items-center justify-between gap-3 sm:flex-row">
       <h1 className="text-2xl font-bold">Dashboard</h1>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline">

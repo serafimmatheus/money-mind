@@ -33,7 +33,7 @@ const SummaryCards = async ({
         amount={balance}
       />
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         <SummaryCard
           icon={
             <Badge className="size-10 bg-foreground/30 hover:bg-foreground/30">
