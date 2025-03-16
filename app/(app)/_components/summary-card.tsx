@@ -2,7 +2,7 @@ import AddTransactionButton from "@/app/_components/add-transaction-button";
 import { Button } from "@/app/_components/ui/button";
 import { Card, CardContent, CardHeader } from "@/app/_components/ui/card";
 import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
-import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
+import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber";
 import { auth } from "@clerk/nextjs/server";
 import { ArrowUpDown } from "lucide-react";
 import { ReactNode } from "react";

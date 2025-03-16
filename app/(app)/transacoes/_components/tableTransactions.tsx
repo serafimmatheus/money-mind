@@ -33,7 +33,7 @@ import {
   TRANSACTIONS_PAYMENT_MAP,
 } from "@/app/_lib/const";
 import { formaterCurrentDate } from "@/app/_lib/formaterCurrentDate";
-import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
+import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber";
 import { Dialog, DialogTrigger } from "@/app/_components/ui/dialog";
 import AddTransactionButton from "@/app/_components/add-transaction-button";
 import { deleteTransactions } from "@/app/_actions/transactions/delete-transactions";

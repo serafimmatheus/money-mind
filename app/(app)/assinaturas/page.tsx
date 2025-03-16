@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from "@/app/_components/ui/card";
 import { Separator } from "@/app/_components/ui/separator";
-import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
 import { CheckIcon, XIcon } from "lucide-react";
 import ButtonPro from "./_components/button-pro";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { db } from "@/app/_lib/prisma";
 import { endOfMonth, startOfMonth } from "date-fns";
+import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber";
 
 const SignaturePage = async () => {
   const { userId } = auth();

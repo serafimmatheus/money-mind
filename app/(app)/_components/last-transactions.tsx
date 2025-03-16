@@ -3,7 +3,7 @@ import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import { Separator } from "@/app/_components/ui/separator";
 import { formaterCurrentDate } from "@/app/_lib/formaterCurrentDate";
-import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber copy";
+import { formaterCurrentNumber } from "@/app/_lib/formaterCurrentNumber";
 import { Transaction, TransactionType } from "@prisma/client";
 import Link from "next/link";
 
