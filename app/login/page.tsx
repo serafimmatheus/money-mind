@@ -13,7 +13,7 @@ const LoginPage = async () => {
     redirect("/");
   }
   return (
-    <div className="grid h-full grid-cols-2">
+    <div className="grid h-full grid-cols-1 md:grid-cols-2">
       <div className="mx-auto flex h-full w-full max-w-[500px] flex-col justify-center gap-6 px-5 md:px-8">
         <Logo />
 
@@ -33,7 +33,7 @@ const LoginPage = async () => {
         </SignInButton>
       </div>
 
-      <div className="relative h-full w-full">
+      <div className="relative hidden h-full w-full md:flex">
         <Image
           src="/login.png"
           alt="Login Image"
