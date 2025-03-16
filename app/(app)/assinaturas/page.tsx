@@ -37,9 +37,9 @@ const SignaturePage = async () => {
   return (
     <div className="container">
       <h1 className="text-2xl font-bold">Assinaturas</h1>
-      <div className="mt-6 flex gap-6">
+      <div className="mt-6 flex flex-wrap gap-6 pb-20">
         <Card
-          className={`relative min-w-96 ${!hasPremiumPlan ? "border-primary" : ""}`}
+          className={`relative w-96 max-w-96 ${!hasPremiumPlan ? "border-primary" : ""}`}
         >
           {!hasPremiumPlan && (
             <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
@@ -82,7 +82,7 @@ const SignaturePage = async () => {
         </Card>
 
         <Card
-          className={`relative min-w-96 ${hasPremiumPlan ? "border-primary" : ""}`}
+          className={`relative w-96 max-w-96 ${hasPremiumPlan ? "border-primary" : ""}`}
         >
           {hasPremiumPlan && (
             <Badge className="absolute -left-1 -top-1 w-fit">Atual</Badge>
